@@ -5,13 +5,22 @@ from django.utils import timezone
 
 def todoView(request):
     all_todo_items = TodoItem.objects.all()
-    return render(request,'todo.html',
-    {'all_items':all_todo_items})
+    return render(request,'todo.html', {'all_items':all_todo_items})
 
 def mybinView(request):
     mybin = BinItem.objects.all()
-    return render(request,'mybin.html',
-    {'all_items':mybin})
+    print(mybin)
+    return render(request,'mybin.html', {'all_items':mybin})
+
+def mybinclearView(request):
+    clear=BinItem.objects.all()
+    clear.delete()
+    return render(request,'mybin.html', )
+
+def mydoneclearView(request):
+    clear=DoneItem.objects.all()
+    clear.delete()
+    return render(request,'mydone.html', )
 
 
 def mydoneView(request):
