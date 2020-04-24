@@ -5,7 +5,7 @@
 <ul>
 {% for done_item in all_items  %}
     <li>
-        {{ done_item.id }}- 完成時間 {{done_item.done_time }}
+        {{ done_item.id }}- 完成時間 {{done_item.done_time |date:'Y-m-d H:i:s'}}
 
         <br>
         內容:{{done_item.content }}

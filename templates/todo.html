@@ -1,4 +1,4 @@
-<h1>  This is the todo page </h1>
+<h1>  This Is The Todo Page </h1>
 
 <!-- <ul>
     <li> temporary todo item A </li>
@@ -10,8 +10,28 @@
     <li>
 
         {{ todo_item.id }}- 
-        {{ todo_item.content }}<{{ todo_item.content | length}}字符>
+        {{ todo_item.content }}
+        <{{ todo_item.content | length}}字符>
 
+        <br>
+        創建時間:
+
+        {{ todo_item.create_time |date:'Y-m-d H:i:s'}}
+        <br>
+        上次修改時間:k
+        {{ todo_item.last_edit  |date:'Y-m-d H:i:s'}}
+        <br>
+    <form action ="/editTodo/{{ todo_item.id }}/" 
+                  method="post">{% csrf_token %}
+        <input type='submit' value='編輯'/>
+        <input type='text' name='content'/>
+    </form>
+
+    <form action ="/updateTodo/{{ todo_item.id }}/" 
+                  method="post">{% csrf_token %}
+        <input type='submit' value='更新'/>
+        <input type='text' name='content'/>
+    </form>
     <form action ="/doneTodo/{{ todo_item.id }}/" 
                   style="display: inline;"
                   method="post">{% csrf_token %}
@@ -24,28 +44,20 @@
         <input type='submit' value='刪除'/>
     </form>
 
-    <br>
 
-    <form action ="/editTodo/{{ todo_item.id }}/" 
-                  method="post">{% csrf_token %}
-        <input type='text' name='content'/>
-        <input type='submit' value='編輯'/>
-    </form>
 
-    <form action ="/updateTodo/{{ todo_item.id }}/" 
-                  method="post">{% csrf_token %}
-        <input type='text' name='content'/>
-        <input type='submit' value='更新'/>
-    </form>
 
 </li>
 {% endfor %}
 </ul>
+<hr>
 
+<ul>
 <form action ="/addTodo/" method="post">{% csrf_token %}
-    <input type='text' name='content'/>
     <input type='submit' value='添加'/>
+    <input type='text' name='content'/>
 </form>
+</ul>
 
 <p>
 
