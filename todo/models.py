@@ -12,4 +12,10 @@ class BinItem(models.Model):
     def __str__(self):
         return self.content
 
+class DoneItem(models.Model):
+    content =models.TextField()
+    done_time=models.DateTimeField()
+    def __str__(self):
+        return self.content
+
 

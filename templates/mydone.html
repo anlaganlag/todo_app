@@ -1,0 +1,18 @@
+
+<h1>  This is the mydone page </h1>
+
+
+<ul>
+{% for done_item in all_items  %}
+    <li>
+        {{ done_item.id }}- 完成時間 {{done_item.done_time }}
+
+        <br>
+        內容:{{done_item.content }}
+
+</li>
+{% endfor %}
+
+<li> <a href = "{% url 'todo' %}" >返回</a> </li>
+</ul>
+

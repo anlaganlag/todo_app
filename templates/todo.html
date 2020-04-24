@@ -9,14 +9,21 @@
 {% for todo_item in all_items  %}
     <li>
 
-        {{ todo_item.id }}- {{todo_item.delete_time}}
+        {{ todo_item.id }}- 
         {{ todo_item.content }}<{{ todo_item.content | length}}字符>
+
+    <form action ="/doneTodo/{{ todo_item.id }}/" 
+                  style="display: inline;"
+                  method="post">{% csrf_token %}
+        <input type='submit' value='完成'/>
+    </form>
 
     <form action ="/deleteTodo/{{ todo_item.id }}/" 
                   style="display: inline;"
                   method="post">{% csrf_token %}
         <input type='submit' value='刪除'/>
     </form>
+
     <br>
 
     <form action ="/editTodo/{{ todo_item.id }}/" 
@@ -42,5 +49,6 @@
 
 <p>
 
+<li> <a href = "{% url 'done' %}" >已經完成</a> </li>
 <li> <a href = "{% url 'bin' %}" >回收站</a> </li>
 </p>

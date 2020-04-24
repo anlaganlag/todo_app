@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .models import TodoItem,BinItem
+from .models import TodoItem,BinItem,DoneItem
 from django.utils import timezone
 
 def todoView(request):
@@ -13,16 +13,30 @@ def mybinView(request):
     return render(request,'mybin.html',
     {'all_items':mybin})
 
+
+def mydoneView(request):
+    mydone = DoneItem.objects.all()
+    return render(request,'mydone.html',
+    {'all_items':mydone})
+
 def addTodo(request,):
     #取回post中的內容..
     new_item = TodoItem(content = request.POST['content'])
     new_item.save()
     return HttpResponseRedirect('/todo/')
 
+def doneTodo(request,todo_id):
+    item_to_done = TodoItem.objects.get(id=todo_id)
+    a = DoneItem(id=item_to_done.id,
+                            content=item_to_done.content,
+                            done_time=timezone.now())
+    a.save()
+    item_to_done.delete()
+    return HttpResponseRedirect('/todo/')
+
 
 def deleteTodo(request,todo_id):
     item_to_delete = TodoItem.objects.get(id=todo_id)
-    print(item_to_delete)
     a = BinItem(id=item_to_delete.id,
                             content=item_to_delete.content,
                             delete_time=timezone.now()
