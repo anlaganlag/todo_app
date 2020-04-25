@@ -10,8 +10,10 @@ from todo.models import TodoItem,DoneItem,BinItem
 #     return render(request,'todo.html', {'all_items':all_todo_items})
 
 class TodoList(ListView):
-    queryset = TodoItem.objects.all()
-    context_object_name ='all_items'
+    # queryset = TodoItem.objects.all()
+    # context_object_name ='all_items'
+    paginate_by=5
+    model = TodoItem
 
 def mybinView(request):
     mybin = BinItem.objects.all()

@@ -3,8 +3,9 @@
         <body>
         <h1>  This Is The Todo Page    of {% now "Y-m-d" %} </h1>
         <ul>
-        {% for todo_item in all_items  %}
-            <li> {{ forloop.counter }}- {{ todo_item.content }} 
+        {% for todo_item in page_obj  %}
+             {{ forloop.counter }}- {{ todo_item.content }} 
+             <br>
             <form action ="/doneTodo/{{ todo_item.id }}/" 
                         style="display: inline;"
                         method="post">{% csrf_token %}
@@ -15,11 +16,12 @@
                         style="display: inline;"
                         method="post">{% csrf_token %}
                 <input type='submit' value='刪除'/>
-            </form>
-                    <br> {{  todo_item.create_time |date:'Md H:m'  }} (創建時間) <br>
-
-                 {{ todo_item.get_rating_display }}  <br>
-                 預計時間:{{ todo_item.runtime}} hrs<br>
+                
+                <div class='text-right'>
+                 <li> {{  todo_item.create_time |date:'Md H:m'  }} (創建時間) </li>
+                 <li>{{ todo_item.get_rating_display }}  </li>
+                 <li>預計時間:{{ todo_item.runtime}} hrs</li>
+                 </div>
             <form action ="/editTodo/{{ todo_item.id }}/" 
                         method="post">{% csrf_token %}
                 <input type='submit' value='編輯'/>
@@ -35,6 +37,39 @@
                     <li>No Todo items yet</li>
                 {% endfor %}
         </ul>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+        {% comment %}
+        <hr>
+        {% if is_paginated %}
+                <nav>
+                        <ul class = ''pagination">
+                                <li class="page-item"></li>
+                                        <a 
+                                                href = "{% url 'todo' %}?page=1"
+                                                class = "page-link"
+                                        >
+
+
+                        </ul>
+                </nav>
+
+                {% endcomment %}
         <hr>
         <p>Using https?
                 {{ request.is_secure|yesno }}

@@ -39,6 +39,8 @@ class TodoItem(models.Model):
     runtime = models.PositiveIntegerField(default=1)
     create_time=models.DateTimeField(auto_now_add=True)
     last_edit=models.DateTimeField(auto_now=True)
+    class Meta:
+            ordering = ('create_time','last_edit','rating','content')
     def __str__(self):
         return f'{self.content} ({self.period})'
 
