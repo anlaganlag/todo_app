@@ -1,0 +1,20 @@
+
+<h1>  This is the mydone page </h1>
+
+
+<ul>
+    {% if all_items %}
+        {% for done_item in all_items  %}
+            <li>
+                內容:{{done_item.content }}<br>
+                {{ done_item.id }}- 完成時間 {{done_item.done_time |date:'Y-m-d H:i:s'}} \
+            </li>
+        {% endfor %}
+    {% else %}
+            <p> All Have Been Done!</p>
+    {% endif %}
+
+<li> <a href = "{% url 'todo' %}" >返回</a> </li>
+<li> <a href = "{% url 'cleardone' %}" >清空已完成</a> </li>
+</ul>
+

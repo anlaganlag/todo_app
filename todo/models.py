@@ -17,7 +17,7 @@ class TodoItem(models.Model):
     TECH =  12
     Remind =  13
     Priorities = (
-                (Important,'重要事項(優先處理'),
+                (Important,'重要事項(優先處理)'),
                 (MVP_Project,'手頭最重要的項目(當紅炸子雞項目)'),
                 (Compound_Effect,'每天都堅持要做的事情(風雨無阻'),
                 (General,'一般'),

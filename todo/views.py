@@ -2,10 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import TodoItem,BinItem,DoneItem
 from django.utils import timezone
+from django.views.generic import ListView
+from todo.models import TodoItem,DoneItem,BinItem
 
-def todoView(request):
-    all_todo_items = TodoItem.objects.all()
-    return render(request,'todo.html', {'all_items':all_todo_items})
+# def todoView(request):
+#     all_todo_items = TodoItem.objects.all()
+#     return render(request,'todo.html', {'all_items':all_todo_items})
+
+class TodoList(ListView):
+    queryset = TodoItem.objects.all()
+    context_object_name ='all_items'
 
 def mybinView(request):
     mybin = BinItem.objects.all()

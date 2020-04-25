@@ -1,0 +1,19 @@
+<h1>  This is the mybin page </h1>
+
+
+<ul>
+{% if all_items %}
+    {% for bin_item in all_items  %}
+        <li>
+            {{ bin_item.id }}- 刪除時間 {{bin_item.delete_time |date:'Y-m-d H:i:s'}}
+            <br>
+            內容:{{ bin_item.content }}
+    </li>
+    {% endfor %}
+{% else %}
+    <p> All Have Been Clear!</p>
+{% endif %}
+<li> <a href = "{% url 'todo' %}" >返回</a> </li>
+<li> <a href = "{% url 'clearbin' %}" >清空回收站</a> </li>
+</ul>
+
