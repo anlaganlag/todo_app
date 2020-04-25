@@ -1,0 +1,9 @@
+
+<h1>  This Is The Create Page </h1>
+
+    <p>
+        <form action ="/addTodo/" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type='submit' value='保存'/>
+        </form>
+    </p>

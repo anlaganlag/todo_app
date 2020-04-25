@@ -18,7 +18,7 @@ from django.urls import path,include
 from  hello.views import myView
 from todo.views import  (
     TodoList,
-    # TodoView,
+    TodoCreate,
     addTodo,
     deleteTodo,
     doneTodo,
@@ -40,6 +40,7 @@ urlpatterns = [
     path('cleardone/',mydoneclearView,name='cleardone'),
     path('done/',mydoneView,name='done'),
     path('todo/',TodoList.as_view(),name='todo'),
+    path('create/',TodoCreate.as_view(),name='create'),
     path('addTodo/',addTodo),
     path('doneTodo/<int:todo_id>/',doneTodo),
     path('deleteTodo/<int:todo_id>/',deleteTodo),

@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
-
+from datetime import datetime, timedelta
 class TodoItem(models.Model):
     Important = 0
     MVP_Project = 1
@@ -33,20 +33,21 @@ class TodoItem(models.Model):
                 (TECH,'技術盞'),
                 (Remind,'提醒'),)
     content =models.TextField(default='今天目標是:')
-    period = models.DateField(default=timezone.now)
+    deadline = models.PositiveIntegerField(default=0,null=True)
     rating = models.IntegerField(
             choices=Priorities,
-            default=Important)
-    runtime = models.PositiveIntegerField(default=1)
+            default=0,
+            null=True)
+    hours = models.PositiveIntegerField(default=0)
     active = models.BooleanField(default=True)
     create_time=models.DateTimeField(auto_now_add=True)
     last_edit=models.DateTimeField(auto_now=True)
     class Meta:
-            ordering = ('create_time','last_edit','rating','content')
+            ordering = ('create_time','last_edit','rating','content',)
     def __str__(self):
-        return f'{self.content} ({self.period})'
-    def get_absolute_url(self):
-        return reverse('todo')
+        return f'{self.content} ({self.hours})'
+    # def get_absolute_url(self):
+        # return reverse('todo')
 
 class BinItem(models.Model):
     content =models.TextField()

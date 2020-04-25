@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import TodoItem,BinItem,DoneItem
 from django.utils import timezone
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from todo.models import TodoItem,DoneItem,BinItem
 from .forms import TodoModelForm
 
@@ -14,7 +14,22 @@ class TodoList(ListView):
     # queryset = TodoItem.objects.all()
     # context_object_name ='all_items'
     model = TodoItem
+    form_class = TodoModelForm
     paginate_by=10
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+
+
+class TodoCreate(CreateView):
+    model = TodoItem
+    template_name = 'todo/todoitem_create.html'
+    form_class = TodoModelForm
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+
+
 
 def mybinView(request):
     mybin = BinItem.objects.all()
@@ -39,7 +54,15 @@ def mydoneView(request):
 
 def addTodo(request,):
     #取回post中的內容..
-    new_item = TodoItem(content = request.POST['content'])
+    if not  request.POST.get('deadline')  or not   request.POST.get('rating') or not request.POST.get('hours'):
+        new_item = TodoItem(content=request.POST['content'])
+    else:
+        new_item = TodoItem(
+            content = request.POST['content'],
+            deadline = request.POST.get('deadline'),
+            rating = request.POST.get('rating'),
+            hours = request.POST.get('hours'),
+        )
     new_item.save()
     return HttpResponseRedirect('/todo/')
 

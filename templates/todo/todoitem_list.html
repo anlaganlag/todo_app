@@ -21,7 +21,8 @@
                 <div class='text-right'>
                  <li> {{  todo_item.create_time |date:'Md H:m'  }} (創建時間) </li>
                  <li>{{ todo_item.get_rating_display }}  </li>
-                 <li>預計時間:{{ todo_item.runtime}} hrs</li>
+                 <li>預計時間:{{ todo_item.deadline}} 天</li>
+                 <li>預計時間:{{ todo_item.hours}} hrs</li>
                  </div>
             <form action ="/editTodo/{{ todo_item.id }}/" 
                         method="post">{% csrf_token %}
@@ -61,13 +62,17 @@
 
         <ul>
         <form action ="/addTodo/" method="post">{% csrf_token %}
+            {{ form.as_p }}
             <input type='submit' value='添加'/>
             <input type='text' name='content'/>
+            {{ form.as_p }}
+
         </form>
         </ul>
 
         <p>
 
+        <li> <a href = "{% url 'create' %}" >添加Todo</a> </li>
         <li> <a href = "{% url 'done' %}" >已經完成</a> </li>
 <li> <a href = "{% url 'bin' %}" >回收站</a> </li>
 </p>

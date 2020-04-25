@@ -7,7 +7,7 @@ class TodoModelForm(forms.ModelForm):
         model = TodoItem
         fields = [
             'content',
-            'period',
+            'deadline',
             'rating',
-            'runtime',
+            'hours',
         ]
