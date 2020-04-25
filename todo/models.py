@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 class TodoItem(models.Model):
     Important = 0
@@ -37,13 +38,15 @@ class TodoItem(models.Model):
             choices=Priorities,
             default=Important)
     runtime = models.PositiveIntegerField(default=1)
+    active = models.BooleanField(default=True)
     create_time=models.DateTimeField(auto_now_add=True)
     last_edit=models.DateTimeField(auto_now=True)
     class Meta:
             ordering = ('create_time','last_edit','rating','content')
     def __str__(self):
         return f'{self.content} ({self.period})'
-
+    def get_absolute_url(self):
+        return reverse('todo')
 
 class BinItem(models.Model):
     content =models.TextField()

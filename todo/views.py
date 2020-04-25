@@ -4,6 +4,7 @@ from .models import TodoItem,BinItem,DoneItem
 from django.utils import timezone
 from django.views.generic import ListView
 from todo.models import TodoItem,DoneItem,BinItem
+from .forms import TodoModelForm
 
 # def todoView(request):
 #     all_todo_items = TodoItem.objects.all()
@@ -12,8 +13,8 @@ from todo.models import TodoItem,DoneItem,BinItem
 class TodoList(ListView):
     # queryset = TodoItem.objects.all()
     # context_object_name ='all_items'
-    paginate_by=5
     model = TodoItem
+    paginate_by=10
 
 def mybinView(request):
     mybin = BinItem.objects.all()

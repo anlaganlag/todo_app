@@ -16,6 +16,7 @@
                         style="display: inline;"
                         method="post">{% csrf_token %}
                 <input type='submit' value='刪除'/>
+            </form>
                 
                 <div class='text-right'>
                  <li> {{  todo_item.create_time |date:'Md H:m'  }} (創建時間) </li>
@@ -37,6 +38,7 @@
                     <li>No Todo items yet</li>
                 {% endfor %}
         </ul>
+
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
@@ -54,26 +56,8 @@
         {% endif %}
     </span>
 </div>
-        {% comment %}
-        <hr>
-        {% if is_paginated %}
-                <nav>
-                        <ul class = ''pagination">
-                                <li class="page-item"></li>
-                                        <a 
-                                                href = "{% url 'todo' %}?page=1"
-                                                class = "page-link"
-                                        >
 
 
-                        </ul>
-                </nav>
-
-                {% endcomment %}
-        <hr>
-        <p>Using https?
-                {{ request.is_secure|yesno }}
-        </p>
 
         <ul>
         <form action ="/addTodo/" method="post">{% csrf_token %}
