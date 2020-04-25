@@ -40,7 +40,7 @@ class TodoItem(models.Model):
     create_time=models.DateTimeField(auto_now_add=True)
     last_edit=models.DateTimeField(auto_now=True)
     def __str__(self):
-        return f'{self.content} {(self.period)}'
+        return f'{self.content} ({self.period})'
 
 
 class BinItem(models.Model):

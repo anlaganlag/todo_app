@@ -1,5 +1,6 @@
 <h1>  This Is The Todo Page    of {% now "Y-m-d" %} </h1>
 
+
 <!-- <ul>
     <li> temporary todo item A </li>
     <li>temporary todo item B</li>
@@ -11,6 +12,7 @@
 
         {{ forloop.counter }}- 
         {{ todo_item.content }}
+        {{ todo_item.rating }}
         <br>
        {{  todo_item.create_time |date:' H:i:s'  }} created
         <br>
