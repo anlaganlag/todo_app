@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+<style>
+body {
+  color: orangered;
+
+  background-color: #ffffe0;
+}
+p.dashed {border-style: dashed;}
+p.groove {border-style: groove;}
+p.outset {border-style: outset;}
+div {
+  height: 25px;
+  width: 100px;
+  background-color: powderblue;
+}
+
+h1 {
+  color: palevioletred;
+  text-align: center;
+}
+input {
+  color: purple;
+}
+span.ridge {border-style: ridge;}
+
+span{
+  color: blue;
+  text-align: center;
+}
+</style>
+</head>
         <body>
         <h1>  This Is The Todo Page    of {% now "Y-m-d" %} </h1>
         <ul>
         {% for todo_item in page_obj  %}
+
+        <span class= 'text-right'>
              {{ forloop.counter }}- {{ todo_item.content }} 
-             <br>
+        </span>
             <form action ="/doneTodo/{{ todo_item.id }}/" 
                         style="display: inline;"
                         method="post">{% csrf_token %}
@@ -15,15 +49,20 @@
             <form action ="/deleteTodo/{{ todo_item.id }}/" 
                         style="display: inline;"
                         method="post">{% csrf_token %}
-                <input type='submit' value='刪除'/>
+                <input type='submit' value='舍棄'/>
             </form>
+
                 
-                <div class='text-right'>
-                 <li> {{  todo_item.create_time |date:'Md H:m'  }} (創建時間) </li>
-                 <li>{{ todo_item.get_rating_display }}  </li>
-                 <li>預計時間:{{ todo_item.deadline}} 天</li>
-                 <li>預計時間:{{ todo_item.hours}} hrs</li>
-                 </div>
+            {% if  not todo_item.deadline and not todo_item.hours %}
+                <br>
+            {% else %}
+                <br>
+                  {{  todo_item.create_time |date:'Md H:m'  }} (創建時間) <br>
+                 類型:{{ todo_item.get_rating_display }}  <br>
+                 預計時間:{{ todo_item.deadline}} 天<br>
+                 預計時間:{{ todo_item.hours}} hrs
+                {% endif %}
+                <br>
             <form action ="/editTodo/{{ todo_item.id }}/" 
                         method="post">{% csrf_token %}
                 <input type='submit' value='編輯'/>
@@ -72,9 +111,9 @@
 
         <p>
 
-        <li> <a href = "{% url 'create' %}" >添加Todo</a> </li>
-        <li> <a href = "{% url 'done' %}" >已經完成</a> </li>
-<li> <a href = "{% url 'bin' %}" >回收站</a> </li>
+        <li> <a href = "{% url 'create' %}" >添加Todo_List</a> </li>
+        <li> <a href = "{% url 'done' %}" >已經完成事件</a> </li>
+<li> <a href = "{% url 'bin' %}" >已舍棄任務</a> </li>
 </p>
 
 

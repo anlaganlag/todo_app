@@ -20,7 +20,7 @@ class TodoItem(models.Model):
     Priorities = (
                 (Important,'重要事項(優先處理)'),
                 (MVP_Project,'手頭最重要的項目(當紅炸子雞項目)'),
-                (Compound_Effect,'每天都堅持要做的事情(風雨無阻'),
+                (Compound_Effect,'每天都堅持要做的事情(風雨無阻)'),
                 (General,'一般'),
                 (Sub_General,'準一般'),
                 (Emergence_Today,'今日緊急項目'),
@@ -46,8 +46,8 @@ class TodoItem(models.Model):
             ordering = ('create_time','last_edit','rating','content',)
     def __str__(self):
         return f'{self.content} ({self.hours})'
-    # def get_absolute_url(self):
-        # return reverse('todo')
+    def get_absolute_url(self):
+        return reverse('todo')
 
 class BinItem(models.Model):
     content =models.TextField()

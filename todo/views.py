@@ -54,15 +54,15 @@ def mydoneView(request):
 
 def addTodo(request,):
     #取回post中的內容..
-    if not  request.POST.get('deadline')  or not   request.POST.get('rating') or not request.POST.get('hours'):
-        new_item = TodoItem(content=request.POST['content'])
-    else:
-        new_item = TodoItem(
-            content = request.POST['content'],
-            deadline = request.POST.get('deadline'),
-            rating = request.POST.get('rating'),
-            hours = request.POST.get('hours'),
-        )
+    # if not  request.POST.get('deadline')  or not   request.POST.get('rating') or not request.POST.get('hours'):
+    new_item = TodoItem(content=request.POST['content'])
+    # else:
+        # new_item = TodoItem(
+            # content = request.POST['content'],
+        #     deadline = request.POST.get('deadline'),
+        #     rating = request.POST.get('rating'),
+        #     hours = request.POST.get('hours'),
+        # )
     new_item.save()
     return HttpResponseRedirect('/todo/')
 
