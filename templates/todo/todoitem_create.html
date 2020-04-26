@@ -1,9 +1,11 @@
 
+    {% load markdown_extras %}
 <h1>  This Is The Create Page </h1>
 
     <p>
         <form action ="." method="post">{% csrf_token %}
-            {{ form.as_p }}
+            {{ form.as_p | markdown |safe}}
+
             <input type='submit' value='保存'/>
         </form>
     </p>

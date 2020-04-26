@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+    {% load markdown_extras %}
     {% load article_tags %}
 
 <head>
 <style>
 body {
-  color: orangered;
+  color: gray;
 
   background-color: #ffffe0;
 }
@@ -22,6 +23,15 @@ h1 {
   color: palevioletred;
   text-align: center;
 }
+
+form {
+  color: blueviolet;
+  }
+
+strong {
+  color: red;
+  text-align: left ;
+}
 input {
   color: purple;
 }
@@ -34,13 +44,13 @@ span{
 </style>
 </head>
         <body>
-        <h1>  This Is The Todo Page    of {% now "Y-m-d" %} </h1>
+        <h1>  This Is The Todo Page    of {% now "Y-m-d" %} <br><small><支持markdown></small> </h1>
+
         <ul>
         {% for todo_item in page_obj  %}
 
-        <span class= 'text-right'>
-             {{ forloop.counter }}- {{ todo_item.content }} 
-        </span>
+             <strong>{{ todo_item.content  | markdown | safe }}  任务{{ forloop.counter }}</strong>
+
             <form action ="/doneTodo/{{ todo_item.id }}/" 
                         style="display: inline;"
                         method="post">{% csrf_token %}
@@ -114,9 +124,9 @@ span{
 
         <p>
 
-        <li> <a href = "{% url 'create' %}" >{% total_todoitem %}项任务执行中</a> </li>
-        <li> <a href = "{% url 'done' %}" >{% total_doneitem %}项任务已完成</a> </li>
-<li> <a href = "{% url 'bin' %}" >{% total_binitem %}项任务已舍弃</a> </li>
+        <li> <a href = "{% url 'create' %}" >添加任务-当前{% total_todoitem %}项任务执行中</a> </li>
+        <li> <a href = "{% url 'done' %}" >查看-{% total_doneitem %}项任务已完成</a> </li>
+<li> <a href = "{% url 'bin' %}" >查看-{% total_binitem %}项任务已舍弃</a> </li>
 
 
         </body>
