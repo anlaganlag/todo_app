@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    {% load article_tags %}
 
 <head>
 <style>
@@ -113,10 +114,9 @@ span{
 
         <p>
 
-        <li> <a href = "{% url 'create' %}" >添加Todo_List</a> </li>
-        <li> <a href = "{% url 'done' %}" >已經完成事件</a> </li>
-<li> <a href = "{% url 'bin' %}" >已舍棄任務</a> </li>
-</p>
+        <li> <a href = "{% url 'create' %}" >{% total_todoitem %}项任务执行中</a> </li>
+        <li> <a href = "{% url 'done' %}" >{% total_doneitem %}项任务已完成</a> </li>
+<li> <a href = "{% url 'bin' %}" >{% total_binitem %}项任务已舍弃</a> </li>
 
 
         </body>
