@@ -15,7 +15,7 @@ class TodoList(ListView):
     # context_object_name ='all_items'
     model = TodoItem
     form_class = TodoModelForm
-    paginate_by=10
+    paginate_by=5
     def form_valid(self, form):
         print(form.cleaned_data)
         return super().form_valid(form)

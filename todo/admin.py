@@ -5,4 +5,7 @@ admin.site.register(TodoItem)
 admin.site.register(BinItem)
 admin.site.register(DoneItem)
 
-# Register your models here.
+
+# class TodoItemAdmin(admin.ModelAdmin):
+    # formfield_overrides = {MarkdownField: {'widget': AdminMarkdownWidget}}
+

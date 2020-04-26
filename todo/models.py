@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from datetime import datetime, timedelta
+
+
 class TodoItem(models.Model):
     Important = 0
     MVP_Project = 1
